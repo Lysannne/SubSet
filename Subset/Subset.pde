@@ -1,5 +1,16 @@
+final int ScreenWidth = 1260;
+final int ScreenHeight = 500;
+final int BackgroundColor = #dbdbdb;
+
+void settings()
+{
+  size(ScreenWidth, ScreenHeight);
+}
+
 void draw()
 {
-  background(#dbdbdb);
-  DrawCard(3, #b500af, 1);
+  background(BackgroundColor);
+  InitializeCards();
+  
+  DrawCards(27);
 }
