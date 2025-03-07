@@ -1,5 +1,5 @@
 void draw()
 {
   background(#dbdbdb);
-  DrawCard(1);
+  DrawCard(3, #b500af, 1);
 }
