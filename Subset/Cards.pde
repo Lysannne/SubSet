@@ -12,7 +12,7 @@ final int CardWidht = 60;
 final int ShapeHeight = 10;
 final int ShapeWidth = 40;
 
-void InitializeCards()
+void InitializeCards() 
 {
   for (int i = 0; i < AmountOfCards; i++)
   {
@@ -30,7 +30,7 @@ void DrawCards(int CardAmount)
   
   for(int i = 0; i < CardAmount; i++)
   {
-    if(i / rowCount >= 9){ rowCount ++;  columnCount = 0;};
+    if(columnCount >= 9){ rowCount ++;  columnCount = 0;};
     
     int cardX = 10 + ((CardWidht + 40) * columnCount);
     int cardY = 10 + ((CardHeight + 40) * (rowCount -1));
@@ -39,8 +39,7 @@ void DrawCards(int CardAmount)
     columnCount ++;
     cardIndex ++;
     
-  };
-  
+  };  
 }
 
 void DrawCard(int index, int cardX, int cardY)
