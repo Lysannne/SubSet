@@ -28,6 +28,8 @@ void InitializeCards()
 
 void InitializePlayOrder()
 {
+   PlayOrder = new IntList();
+
    //Kaarten toevoegen
   for (int i = 0; i < AmountOfCards; i++)
   {
