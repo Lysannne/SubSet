@@ -1,11 +1,15 @@
 final IntList CardNumbers = new IntList(1, 2, 3);
 final IntList CardShapes = new IntList(1, 2, 3);
 final IntList CardColors = new IntList(#0900b5, #00b527, #b500af);
-final int AmountOfCards = 27; // 3 colors x 3 shapes x 3 numbers
+
+final int AmountOfCards = 27; // 3 kleuren x 3 vormen x 3 nummers
 
 int[] Numbers = new int[AmountOfCards];
 int[] Colors = new int[AmountOfCards];
 int[] Shapes = new int[AmountOfCards];
+
+IntList ShownCards = new IntList();
+IntList PlayOrder = new IntList();
 
 final int CardHeight = 100;
 final int CardWidht = 60;
@@ -22,22 +26,42 @@ void InitializeCards()
   }
 }
 
-void DrawCards(int CardAmount)
+void InitializePlayOrder()
 {
-  int rowCount = 1;
-  int columnCount = 0;
-  int cardIndex = 0;
-  
-  for(int i = 0; i < CardAmount; i++)
+   //Kaarten toevoegen
+  for (int i = 0; i < AmountOfCards; i++)
   {
-    if(columnCount >= 9){ rowCount ++;  columnCount = 0;};
+    PlayOrder.append(i);
+  }
+
+  // Random volgorde
+  PlayOrder.shuffle();
+}
+
+void TakeCards(int amount)
+{
+  for(int i = 0; i < amount; i++)
+  {
+    int card = PlayOrder.get(0); //Pak bovenste kaart
+    ShownCards.append(card); //Voeg toe aan kaarten op tafel
+    PlayOrder.remove(0); //Verwijder van stapel
+  }
+}
+
+void DrawCards()
+{
+  int rowCount = 0;
+  int columnCount = 0;
+  
+  for(int i = 0; i < 9; i++)
+  {
+    if(columnCount >= 3){ rowCount ++;  columnCount = 0;};
     
-    int cardX = 10 + ((CardWidht + 40) * columnCount);
-    int cardY = 10 + ((CardHeight + 40) * (rowCount -1));
+    int cardX = 50 + ((CardWidht + 40) * columnCount);
+    int cardY = 10 + ((CardHeight + 40) * rowCount);
     
-    DrawCard(cardIndex, cardX, cardY);
-    columnCount ++;
-    cardIndex ++;
+    DrawCard(ShownCards.get(i), cardX, cardY);
+    columnCount ++;  
     
   };  
 }
@@ -48,7 +72,7 @@ void DrawCard(int index, int cardX, int cardY)
   int shapeColor = CardColors.get(Colors[index]);
   int shapeType = CardShapes.get(Shapes[index]);
   
-  //base card
+  //Kaart
   DrawRectangle(CORNER, cardX, cardY, 60, 100, #ffffff, 10);
   int spacing = 100 / (number + 1);
   
@@ -56,11 +80,10 @@ void DrawCard(int index, int cardX, int cardY)
   {
     int shapeY = (i + 1) * spacing;
     
-    //shape
+    //Vormen
     switch(shapeType)
     {
-      case 1: 
-        //DrawRectangle(CENTER, cardX + (CardWidht / 2), cardY + shapeY, 40, 15, shapeColor, 0);
+      case 1:        
         DrawSwirl(cardX+ (CardWidht / 2), cardY + shapeY, ShapeWidth, ShapeHeight, shapeColor);
        break;
        case 2: 
