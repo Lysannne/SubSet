@@ -1,6 +1,8 @@
 final int GameBackgroundColor = #dbdbdb;
 final int StatsBackgroundColor = #363636;
 
+int SetsFound = 0;
+
 void DrawStats()
 {
   DrawRectangle(
@@ -9,6 +11,7 @@ void DrawStats()
   0,
   ScreenWidth /2,
   ScreenHeight,
+  StatsBackgroundColor,
   StatsBackgroundColor,
   0
   );
@@ -27,7 +30,7 @@ void DrawStats()
   40 
   );
   text(
-  "Sets gevonden: ",
+  "Sets gevonden: " + SetsFound,
   ScreenWidth/2 + 10,
   70 
   );

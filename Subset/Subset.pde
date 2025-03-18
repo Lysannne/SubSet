@@ -16,3 +16,11 @@ void keyPressed()
     currentScreen = GameScreen;
   }
 }
+
+void mousePressed()
+{
+  if(currentScreen == GameScreen)
+  {
+    HandleCardClick();
+  };
+}

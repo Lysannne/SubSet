@@ -18,6 +18,7 @@ void DrawLogo(int x, int y)
                   squareSize, 
                   squareSize, 
                   color(0), 
+                  color(0), 
                   0);
   }
   
@@ -29,6 +30,7 @@ void DrawLogo(int x, int y)
                   int(y + squareSize * 0.1), 
                   int(squareSize * 0.8), 
                   int(squareSize * 0.8), 
+                  color(255), 
                   color(255), 
                   0);
    }
