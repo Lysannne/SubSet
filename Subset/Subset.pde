@@ -3,10 +3,19 @@ void settings()
   size(ScreenWidth, ScreenHeight);
 }
 
+void setup()
+{
+  InitializeCards();  
+  InitializePlayOrder();
+  DrawTitleScreen();
+}
+
 void draw()
 {
-  DrawTitleScreen();
-  SwitchScreen();
+ if(currentScreen == GameScreen)
+ {
+   DrawStats();
+ }
 }
 
 void keyPressed()
@@ -14,6 +23,7 @@ void keyPressed()
   if(currentScreen == TitleScreen)
   {
     currentScreen = GameScreen;
+    SwitchScreen();
   }
 }
 

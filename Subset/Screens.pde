@@ -18,8 +18,6 @@ void DrawGameScreen()
 {
   background(GameBackgroundColor);
   DrawStats();
-  InitializeCards();  
-  InitializePlayOrder();
   TakeCards(9);
   DrawCards();
 }

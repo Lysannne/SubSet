@@ -61,8 +61,8 @@ void DrawCards()
   int columnCount = 0;
   boolean IsSelected = false;
   
-  CardXCoordinates = new IntList();
-  CardYCoordinates = new IntList();
+  CardXCoordinates.clear();
+  CardYCoordinates.clear();
   
   for(int i = 0; i < ShownCards.size(); i++)
   {
@@ -125,4 +125,34 @@ void DrawCard(int index, int cardX, int cardY, boolean selected)
        break;
     }   
   }   
+}
+
+boolean CardsAreSet(int card1, int card2, int card3)
+{ 
+  if(!ColorsAreSet(Colors[card1], Colors[card2], Colors[card3])) return false;
+  if(!ShapesAreSet(Shapes[card1], Shapes[card2], Shapes[card3])) return false;
+  if(!NumbersAreSet(Numbers[card1], Numbers[card2], Numbers[card3])) return false;   
+   
+  return true;
+}
+
+boolean ColorsAreSet(int color1, int color2, int color3)
+{
+    if(color1 == color2 && color1 == color3) return true; //Allemaal dezelfde kleur
+    if(color1 != color2 && color1 != color3 && color2 != color3) return true; //Allemaal andere kleur
+    return false;
+}
+
+boolean ShapesAreSet(int shape1, int shape2, int shape3)
+{
+    if(shape1 == shape2 && shape1 == shape3) return true; //Allemaal dezelfde vorm
+    if(shape1 != shape2 && shape1 != shape3 && shape2 != shape3) return true; //Allemaal andere vorm
+    return false;
+}
+
+boolean NumbersAreSet(int number1, int number2, int number3)
+{
+    if(number1 == number2 && number1 == number3) return true; //Allemaal dezelfde aantal
+    if(number1 != number2 && number1 != number3 && number2 != number3) return true; //Allemaal andere aantal
+    return false;
 }

@@ -23,6 +23,21 @@ void HandleCardClick()
       else
       {
         SelectedCards.append(ShownCards.get(i));      
+        
+        if(SelectedCards.size() == 3)
+        {
+          if(CardsAreSet(SelectedCards.get(0), SelectedCards.get(1), SelectedCards.get(2)))
+          {
+            SetsFound++;
+            
+            ShownCards.removeValue(SelectedCards.get(0));
+            ShownCards.removeValue(SelectedCards.get(1));
+            ShownCards.removeValue(SelectedCards.get(2));
+            
+            TakeCards(3);            
+          }
+          SelectedCards.clear();         
+        }
       }
     } 
   };
