@@ -30,8 +30,13 @@ void DrawStats()
   40 
   );
   text(
-  "Sets gevonden: " + SetsFound,
+  "Sets op tafel: " + SetsInShown(),
   SCREEN_WIDTH/2 + 10,
   70 
+  );
+  text(
+  "Sets gevonden: " + SetsFound,
+  SCREEN_WIDTH/2 + 10,
+  100 
   );
 }

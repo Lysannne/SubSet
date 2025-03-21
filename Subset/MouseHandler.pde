@@ -34,9 +34,19 @@ void HandleCardClick()
             ShownCards.removeValue(SelectedCards.get(1));
             ShownCards.removeValue(SelectedCards.get(2));
             
-            TakeCards(3);            
+            if(PlayOrder.size() >= 3)
+            {
+              TakeCards(3);            
+            }  
           }
-          SelectedCards.clear();         
+          SelectedCards.clear();  
+          
+          if(SetsInShown() == 0 || PlayOrder.size() == 0) // Spel afgelopen
+          {
+            currentScreen = ENDSCREEN;
+            SwitchScreen();
+            return;
+          }
         }
       }
     } 

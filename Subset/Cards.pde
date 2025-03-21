@@ -144,3 +144,23 @@ boolean AttributesAreSet(int attribute1, int attribute2, int attribute3)
     if(attribute1 != attribute2 && attribute1 != attribute3 && attribute2 != attribute3) return true; //Allemaal anders
     return false;
 }
+
+int SetsInShown()
+{
+  int setCount = 0;
+  for (int i = 0; i < ShownCards.size() -2; i++)
+  {
+    for (int j = i + 1; j < ShownCards.size() -1; j++)
+    {
+      for (int k = j + 1; k < ShownCards.size(); k++)
+      {
+        if(CardsAreSet(ShownCards.get(i), ShownCards.get(j), ShownCards.get(k)))
+        {
+          setCount++;
+        }
+      }
+    }
+  }
+  
+  return setCount;
+}

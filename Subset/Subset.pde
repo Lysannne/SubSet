@@ -25,6 +25,12 @@ void keyPressed()
     currentScreen = GAMESCREEN;
     SwitchScreen();
   }
+  else if(currentScreen == ENDSCREEN)
+  {
+    currentScreen = TITLESCREEN;
+    SwitchScreen();
+    RestartGame();
+  }
 }
 
 void mousePressed()
