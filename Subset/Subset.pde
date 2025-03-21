@@ -1,6 +1,6 @@
 void settings()
 {
-  size(ScreenWidth, ScreenHeight);
+  size(SCREEN_WIDTH, SCREEN_HEIGTH);
 }
 
 void setup()
@@ -12,7 +12,7 @@ void setup()
 
 void draw()
 {
- if(currentScreen == GameScreen)
+ if(currentScreen == GAMESCREEN)
  {
    DrawStats();
  }
@@ -20,16 +20,16 @@ void draw()
 
 void keyPressed()
 {
-  if(currentScreen == TitleScreen)
+  if(currentScreen == TITLESCREEN)
   {
-    currentScreen = GameScreen;
+    currentScreen = GAMESCREEN;
     SwitchScreen();
   }
 }
 
 void mousePressed()
 {
-  if(currentScreen == GameScreen)
+  if(currentScreen == GAMESCREEN)
   {
     HandleCardClick();
   };

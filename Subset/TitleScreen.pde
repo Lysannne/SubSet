@@ -1,4 +1,4 @@
-final int TitleScreenBackgroundColor = #b500af;
+final int TITLESCREEN_BACKGROUNDCOLOR = #b500af;
 
 void DrawLogo(int x, int y) 
 {

@@ -14,7 +14,7 @@ void HandleCardClick()
     cardX = CardXCoordinates.get(i);
     cardY = CardYCoordinates.get(i);
     
-    if (MouseOnRect(cardX, cardY, CardWidht, CardHeight))
+    if (MouseOnRect(cardX, cardY, CARD_WIDTH, CARD_HEIGTH))
     {
       if (SelectedCards.hasValue(ShownCards.get(i)))
       {
