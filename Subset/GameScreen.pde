@@ -1,5 +1,5 @@
-final int GameBackgroundColor = #dbdbdb;
-final int StatsBackgroundColor = #363636;
+final int GAME_BACKGROUNDCOLOR = #dbdbdb;
+final int STATS_BACKGROUNDCOLOR = #363636;
 
 int SetsFound = 0;
 
@@ -7,12 +7,12 @@ void DrawStats()
 {
   DrawRectangle(
   CORNER,
-  ScreenWidth /2, 
+  SCREEN_WIDTH /2, 
   0,
-  ScreenWidth /2,
-  ScreenHeight,
-  StatsBackgroundColor,
-  StatsBackgroundColor,
+  SCREEN_WIDTH /2,
+  SCREEN_HEIGTH,
+  STATS_BACKGROUNDCOLOR,
+  STATS_BACKGROUNDCOLOR,
   0
   );
   
@@ -20,18 +20,23 @@ void DrawStats()
   textSize(25);
   textAlign(LEFT, TOP);
   text(
-  "Kaarten gespeeld: " + (AmountOfCards - PlayOrder.size()),
-  ScreenWidth/2 + 10,
+  "Kaarten gespeeld: " + (AMOUNT_OF_CARDS - PlayOrder.size()),
+  SCREEN_WIDTH/2 + 10,
   10
   );
   text(
   "Kaarten over: " + (PlayOrder.size()),
-  ScreenWidth/2 + 10,
+  SCREEN_WIDTH/2 + 10,
   40 
   );
   text(
-  "Sets gevonden: " + SetsFound,
-  ScreenWidth/2 + 10,
+  "Sets op tafel: " + SetsInShown(),
+  SCREEN_WIDTH/2 + 10,
   70 
+  );
+  text(
+  "Sets gevonden: " + SetsFound,
+  SCREEN_WIDTH/2 + 10,
+  100 
   );
 }

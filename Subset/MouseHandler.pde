@@ -14,7 +14,7 @@ void HandleCardClick()
     cardX = CardXCoordinates.get(i);
     cardY = CardYCoordinates.get(i);
     
-    if (MouseOnRect(cardX, cardY, CardWidht, CardHeight))
+    if (MouseOnRect(cardX, cardY, CARD_WIDTH, CARD_HEIGTH))
     {
       if (SelectedCards.hasValue(ShownCards.get(i)))
       {
@@ -34,9 +34,19 @@ void HandleCardClick()
             ShownCards.removeValue(SelectedCards.get(1));
             ShownCards.removeValue(SelectedCards.get(2));
             
-            TakeCards(3);            
+            if(PlayOrder.size() >= 3)
+            {
+              TakeCards(3);            
+            }  
           }
-          SelectedCards.clear();         
+          SelectedCards.clear();  
+          
+          if(SetsInShown() == 0 || PlayOrder.size() == 0) // Spel afgelopen
+          {
+            currentScreen = ENDSCREEN;
+            SwitchScreen();
+            return;
+          }
         }
       }
     } 

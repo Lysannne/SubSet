@@ -1,13 +1,13 @@
-final IntList CardNumbers = new IntList(1, 2, 3);
-final IntList CardShapes = new IntList(1, 2, 3);
-final IntList CardColors = new IntList(#0900b5, #00b527, #b500af);
+final IntList CARD_NUMBERS = new IntList(1, 2, 3);
+final IntList CARD_SHAPES = new IntList(1, 2, 3);
+final IntList CARD_COLORS = new IntList(#0900b5, #00b527, #b500af);
 
-final int AmountOfCards = 27; // 3 kleuren x 3 vormen x 3 nummers
-final int CardBaseColor = #ffffff;
+final int AMOUNT_OF_CARDS = 27; // 3 kleuren x 3 vormen x 3 nummers
+final int CARD_BASECOLOR = #ffffff;
 
-int[] Numbers = new int[AmountOfCards];
-int[] Colors = new int[AmountOfCards];
-int[] Shapes = new int[AmountOfCards];
+int[] Numbers = new int[AMOUNT_OF_CARDS];
+int[] Colors = new int[AMOUNT_OF_CARDS];
+int[] Shapes = new int[AMOUNT_OF_CARDS];
 
 IntList ShownCards = new IntList();
 IntList PlayOrder = new IntList();
@@ -16,18 +16,20 @@ IntList SelectedCards = new IntList();
 IntList CardXCoordinates = new IntList();
 IntList CardYCoordinates = new IntList();
 
-final int CardHeight = 100;
-final int CardWidht = 60;
-final int ShapeHeight = 10;
-final int ShapeWidth = 40;
+final int ATTRIBUTE_POSSIBILITIES = 3;  
+
+final int CARD_HEIGTH = 100;
+final int CARD_WIDTH = 60;
+final int SHAPE_HEIGTH = 10;
+final int SHAPE_WIDTH = 40;
 
 void InitializeCards() 
 {
-  for (int i = 0; i < AmountOfCards; i++)
+  for (int i = 0; i < AMOUNT_OF_CARDS; i++)
   {
-    Numbers[i] = i % 3;
-    Colors[i] = (i / 3) % 3;
-    Shapes[i] = (i / (AmountOfCards / 3)) % 3;
+    Numbers[i] = i % ATTRIBUTE_POSSIBILITIES;
+    Colors[i] = (i / ATTRIBUTE_POSSIBILITIES) % ATTRIBUTE_POSSIBILITIES;
+    Shapes[i] = (i / (AMOUNT_OF_CARDS / ATTRIBUTE_POSSIBILITIES)) % ATTRIBUTE_POSSIBILITIES;
   }
 }
 
@@ -36,7 +38,7 @@ void InitializePlayOrder()
    PlayOrder = new IntList();
 
    //Kaarten toevoegen
-  for (int i = 0; i < AmountOfCards; i++)
+  for (int i = 0; i < AMOUNT_OF_CARDS; i++)
   {
     PlayOrder.append(i);
   }
@@ -68,8 +70,8 @@ void DrawCards()
   {
     if(columnCount >= 3){ rowCount ++;  columnCount = 0;}
     
-    int cardX = 50 + ((CardWidht + 40) * columnCount);
-    int cardY = 10 + ((CardHeight + 40) * rowCount);
+    int cardX = 50 + ((CARD_WIDTH + 40) * columnCount);
+    int cardY = 10 + ((CARD_HEIGTH + 40) * rowCount);
     
     CardXCoordinates.append(cardX);
     CardYCoordinates.append(cardY);
@@ -84,18 +86,18 @@ void DrawCards()
 
 void DrawCard(int index, int cardX, int cardY, boolean selected)
 {
-  int number = CardNumbers.get(Numbers[index]);
-  int shapeColor = CardColors.get(Colors[index]);
-  int shapeType = CardShapes.get(Shapes[index]);
+  int number = CARD_NUMBERS.get(Numbers[index]);
+  int shapeColor = CARD_COLORS.get(Colors[index]);
+  int shapeType = CARD_SHAPES.get(Shapes[index]);
   
-  int cardStrokeColor = CardBaseColor;
+  int cardStrokeColor = CARD_BASECOLOR;
   if(selected)
   {
     cardStrokeColor = #ff0000; //Rode rand als de kaart geselcteerd is
   }
   
   //Kaart
-  DrawRectangle(CORNER, cardX, cardY, CardWidht, CardHeight, CardBaseColor, cardStrokeColor, 10);
+  DrawRectangle(CORNER, cardX, cardY, CARD_WIDTH, CARD_HEIGTH, CARD_BASECOLOR, cardStrokeColor, 10);
   int spacing = 100 / (number + 1);
   
   for(int i = 0; i < number; i++)
@@ -106,21 +108,21 @@ void DrawCard(int index, int cardX, int cardY, boolean selected)
     switch(shapeType)
     {
       case 1:        
-        DrawSwirl(cardX+ (CardWidht / 2), cardY + shapeY, ShapeWidth, ShapeHeight, shapeColor);
+        DrawSwirl(cardX+ (CARD_WIDTH / 2), cardY + shapeY, SHAPE_WIDTH, SHAPE_HEIGTH, shapeColor);
        break;
        case 2: 
-         DrawRectangle(CENTER, cardX + (CardWidht / 2),  cardY + shapeY, ShapeWidth, ShapeHeight, shapeColor, shapeColor, 30);
+         DrawRectangle(CENTER, cardX + (CARD_WIDTH / 2),  cardY + shapeY, SHAPE_WIDTH, SHAPE_HEIGTH, shapeColor, shapeColor, 30);
        break;
        case 3: 
          DrawQuad(
          cardX + 15, 
          cardY + shapeY,  
-         cardX + (CardWidht/2), 
-         (cardY + shapeY + (ShapeHeight/2)),
+         cardX + (CARD_WIDTH/2), 
+         (cardY + shapeY + (SHAPE_HEIGTH/2)),
          cardX + 45, 
          cardY + shapeY,
-         cardX + (CardWidht/2),
-         (cardY + shapeY - (ShapeHeight/2)),
+         cardX + (CARD_WIDTH/2),
+         (cardY + shapeY - (SHAPE_HEIGTH/2)),
          shapeColor);
        break;
     }   
@@ -129,30 +131,36 @@ void DrawCard(int index, int cardX, int cardY, boolean selected)
 
 boolean CardsAreSet(int card1, int card2, int card3)
 { 
-  if(!ColorsAreSet(Colors[card1], Colors[card2], Colors[card3])) return false;
-  if(!ShapesAreSet(Shapes[card1], Shapes[card2], Shapes[card3])) return false;
-  if(!NumbersAreSet(Numbers[card1], Numbers[card2], Numbers[card3])) return false;   
+  if(!AttributesAreSet(Colors[card1], Colors[card2], Colors[card3])) return false;
+  if(!AttributesAreSet(Shapes[card1], Shapes[card2], Shapes[card3])) return false;
+  if(!AttributesAreSet(Numbers[card1], Numbers[card2], Numbers[card3])) return false;   
    
   return true;
 }
 
-boolean ColorsAreSet(int color1, int color2, int color3)
+boolean AttributesAreSet(int attribute1, int attribute2, int attribute3)
 {
-    if(color1 == color2 && color1 == color3) return true; //Allemaal dezelfde kleur
-    if(color1 != color2 && color1 != color3 && color2 != color3) return true; //Allemaal andere kleur
+    if(attribute1 == attribute2 && attribute1 == attribute3) return true; //Allemaal hetzelfde
+    if(attribute1 != attribute2 && attribute1 != attribute3 && attribute2 != attribute3) return true; //Allemaal anders
     return false;
 }
 
-boolean ShapesAreSet(int shape1, int shape2, int shape3)
+int SetsInShown()
 {
-    if(shape1 == shape2 && shape1 == shape3) return true; //Allemaal dezelfde vorm
-    if(shape1 != shape2 && shape1 != shape3 && shape2 != shape3) return true; //Allemaal andere vorm
-    return false;
-}
-
-boolean NumbersAreSet(int number1, int number2, int number3)
-{
-    if(number1 == number2 && number1 == number3) return true; //Allemaal dezelfde aantal
-    if(number1 != number2 && number1 != number3 && number2 != number3) return true; //Allemaal andere aantal
-    return false;
+  int setCount = 0;
+  for (int i = 0; i < ShownCards.size() -2; i++)
+  {
+    for (int j = i + 1; j < ShownCards.size() -1; j++)
+    {
+      for (int k = j + 1; k < ShownCards.size(); k++)
+      {
+        if(CardsAreSet(ShownCards.get(i), ShownCards.get(j), ShownCards.get(k)))
+        {
+          setCount++;
+        }
+      }
+    }
+  }
+  
+  return setCount;
 }
